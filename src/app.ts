@@ -33,7 +33,7 @@ app.get('/products', async (req: Request, res: Response) => {
       products,
     })
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 })
 
@@ -45,7 +45,7 @@ app.get('/product/:id', async (req: Request, res: Response) => {
       product,
     })
   } catch (error) {
-    console.error(error)
+    console.log(error)
   }
 })
 
