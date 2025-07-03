@@ -27,18 +27,26 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.get('/products', async (req: Request, res: Response) => {
-  const products = await ProductModel.find()
-  res.status(200).json({
-    products,
-  })
+  try {
+    const products = await ProductModel.find()
+    res.status(200).json({
+      products,
+    })
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 app.get('/product/:id', async (req: Request, res: Response) => {
-  const { id } = req.params
-  const product = await ProductModel.findById(id)
-  res.status(200).json({
-    product,
-  })
+  try {
+    const { id } = req.params
+    const product = await ProductModel.findById(id)
+    res.status(200).json({
+      product,
+    })
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 export default app
