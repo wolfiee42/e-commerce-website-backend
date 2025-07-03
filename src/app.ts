@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import { ProductModel } from './model'
 
 const app: Application = express()
 
@@ -9,7 +10,7 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173'],
+    origin: ['http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
   }),
@@ -22,6 +23,21 @@ app.get('/', (req: Request, res: Response) => {
     success: true,
     message: 'Server is running',
     timestamp: new Date().toISOString(),
+  })
+})
+
+app.get('/products', async (req: Request, res: Response) => {
+  const products = await ProductModel.find()
+  res.status(200).json({
+    products,
+  })
+})
+
+app.get('/product/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const product = await ProductModel.findById(id)
+  res.status(200).json({
+    product,
   })
 })
 
