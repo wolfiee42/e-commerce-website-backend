@@ -2,6 +2,11 @@
 
 This is a backend for an e-commerce website built with Node.js, Express, TypeScript, and MongoDB (via Mongoose). It provides basic API endpoints for product management deployed on Vercel.
 
+## Live Link & Client Side
+
+[Live Link](https://e-commerce-website-backend-gules-nu.vercel.app)
+[Client side repo](https://github.com/wolfiee42/e-commerce-website)
+
 ## Features
 
 - **Express.js** server with TypeScript support
@@ -83,7 +88,3 @@ This is a backend for an e-commerce website built with Node.js, Express, TypeScr
 
 - **Vercel:**  
   The project includes a `vercel.json` for deployment configuration.
-
-## License
-
-ISC
