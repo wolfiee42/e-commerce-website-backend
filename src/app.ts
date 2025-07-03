@@ -42,3 +42,5 @@ app.get('/product/:id', async (req: Request, res: Response) => {
 })
 
 export default app
+
+module.exports = app
