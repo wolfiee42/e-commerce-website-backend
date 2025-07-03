@@ -1,15 +1,14 @@
 import { Server } from 'http'
 import app from './app'
-import config from './config'
 import mongoose from 'mongoose'
 
 let server: Server
 
 async function main() {
   try {
-    await mongoose.connect(config.database_url as string)
-    server = app.listen(config.port, () => {
-      console.log(`Application is listening on port ${config.port}`)
+    await mongoose.connect(process.env.DATABASE_URL as string)
+    server = app.listen(process.env.PORT, () => {
+      console.log(`Application is listening on port ${process.env.PORT}`)
     })
   } catch (error) {
     console.log('Server is not running', error)
