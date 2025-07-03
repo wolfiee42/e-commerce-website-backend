@@ -2,6 +2,10 @@ import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { ProductModel } from './model'
+import mongoose from 'mongoose'
+import { Server } from 'http'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app: Application = express()
 
@@ -16,6 +20,35 @@ app.use(
   }),
 )
 app.use(cookieParser())
+let server: Server
+
+async function main() {
+  try {
+    await mongoose.connect(process.env.DATABASE_URL as string)
+    server = app.listen(process.env.PORT, () => {
+      console.log(`Application is listening on port ${process.env.PORT}`)
+    })
+  } catch (error) {
+    console.log('Server is not running', error)
+  }
+}
+
+main()
+
+process.on('unhandledRejection', () => {
+  console.log(`Unhandled Rejection. Shutting down...`)
+  if (server) {
+    server.close(() => {
+      process.exit(1)
+    })
+  }
+  process.exit(1)
+})
+
+process.on('uncaughtException', () => {
+  console.log(`Uncaught Exception. Shutting down...`)
+  process.exit(1)
+})
 
 // routes
 app.get('/', (req: Request, res: Response) => {
